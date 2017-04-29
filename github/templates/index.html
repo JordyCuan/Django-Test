@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Github Navigator</title>
+    </head>
+    <body>
+        <h1> {{search_term}} </h1>
+
+        {% for item in data %}
+
+        <h2>{{loop.index}}. {{item.name}}</h2>
+        <h3> Created {{item.created_at}}</h3>
+        <a href="https://github.com/{{item.owner.login}}"><img src="{{item.owner.avatar_url}}" alt="avatar" height="42" width="42"/></a>
+        {{item.owner.login}}
+
+
+        <h3>LastCommit</h3>
+        {{item.last.sha}} {{item.last.commit.message}}  
+
+        {% if item.last.author is not none %}
+        	{{item.last.author.login}}
+        {% else %}
+        	{{item.last.commit.author.name}}
+        {% endif %}
+        <hr/>
+
+        {% endfor %}
+
+    </body>
+</html>
